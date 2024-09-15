@@ -5,8 +5,12 @@
         <h2>Order #{{ $order->id }}</h2>
         <div class="mb-4">
             <h4>User Details</h4>
-            <p>Name: {{ $order->user->name }}</p>
-            <p>Email: {{ $order->user->email }}</p>
+            @if ($order->user)
+                <p>Name: {{ $order->user->name }}</p>
+                <p>Email: {{ $order->user->email }}</p>
+            @else
+                <p>User details not available.</p>
+            @endif
         </div>
         <div class="mb-4">
             <h4>Order Details</h4>
@@ -28,9 +32,6 @@
                     @endforeach
                 </tbody>
             </table>
-        </div>
-        <div class="mb-4">
-            <h4>Total Amount: ${{ number_format($order->total_amount, 2) }}</h4>
         </div>
     </div>
 @endsection

@@ -87,6 +87,7 @@ Route::delete('/admin/products/{product}', [AdminProductController::class, 'dest
 
 // Order Routes
 Route::get('/admin/orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');
+Route::get('/admin/orders/show', [AdminOrderController::class, 'show'])->name('admin.orders.show');
 Route::get('/admin/orders/create', [AdminOrderController::class, 'create'])->name('admin.orders.create');
 Route::post('/admin/orders', [AdminOrderController::class, 'store'])->name('admin.orders.store');
 Route::get('/admin/orders/{order}/edit', [AdminOrderController::class, 'edit'])->name('admin.orders.edit');
@@ -102,6 +103,11 @@ Route::get('/admin/customers/{customer}/edit', [AdminCustomerController::class, 
 Route::put('/admin/customers/{customer}', [AdminCustomerController::class, 'update'])->name('admin.customers.update');
 Route::delete('/admin/customers/{customer}', [AdminCustomerController::class, 'destroy'])->name('admin.customers.destroy');
 
-Route::get('admin/orders/{order}/invoice', [AdminOrderController::class, 'generateInvoice'])->name('order.invoice');
+// Route for generating an invoice
+Route::get('admin/orders/{order}/invoice', [AdminOrderController::class, 'generateInvoice'])->name('orders.invoice');
+
+// Route for generating order reports
 Route::get('admin/reports/orders', [ReportController::class, 'orderReport'])->name('report.orders');
+
+// Route for generating customer reports
 Route::get('admin/reports/customers', [ReportController::class, 'customerReport'])->name('report.customers');

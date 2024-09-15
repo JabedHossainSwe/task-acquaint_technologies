@@ -90,7 +90,7 @@
                 <div class="card text-white bg-info mb-3">
                     <div class="card-header">Invoicing System</div>
                     <div class="card-body">
-                        <a href="{{ route('order.invoice', ['order' => 1]) }}" class="btn btn-light w-100">Generate Invoice
+                        <a href="{{ route('orders.invoice', ['order' => 1]) }}" class="btn btn-light w-100">Generate Invoice
                             (PDF)</a>
                     </div>
                 </div>
