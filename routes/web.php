@@ -56,7 +56,7 @@ Route::get('/admin/dashboard', function () {
   if (Auth::check() && Auth::user()->id === 1) {
     // Fetch data
     $totalOrders = Order::whereMonth('created_at', now()->month)->count();
-    $totalSales = Order::whereMonth('created_at', now()->month)->sum('total');
+    $totalSales = Order::whereMonth('created_at', now()->month)->sum('total_amount'); // Use 'total_amount'
     $topProducts = Product::withCount('orders')
       ->orderBy('orders_count', 'desc')
       ->take(5)
@@ -66,7 +66,8 @@ Route::get('/admin/dashboard', function () {
   }
 
   return redirect('/');
-});
+})->name('admin.dashboard');
+
 
 Route::resource('admin/categories', AdminCategoryController::class);
 // Route::resource('admin/products', AdminProductController::class);
