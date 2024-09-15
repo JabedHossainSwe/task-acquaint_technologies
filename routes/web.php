@@ -10,6 +10,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReportController;
+use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -50,21 +52,26 @@ Route::post('/order', [OrderController::class, 'place'])->name('order.place');
 Route::get('/order/confirmation', [OrderController::class, 'confirmation'])->name('order.confirmation');
 
 // Admin Routes
-// routes/web.php
+Route::get('/admin/dashboard', function () {
+  if (Auth::check() && Auth::user()->id === 1) {
+    // Fetch data
+    $totalOrders = Order::whereMonth('created_at', now()->month)->count();
+    $totalSales = Order::whereMonth('created_at', now()->month)->sum('total');
+    $topProducts = Product::withCount('orders')
+      ->orderBy('orders_count', 'desc')
+      ->take(5)
+      ->get();
 
-Route::middleware(['auth', 'admin'])->group(function () {
-  // Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-  Route::get('/admin/dashboard', function () {
-    if (Auth::user()->id !== 1) {
-      return redirect('/');
-    }
-    return view('admin.dashboard');
-  })->name('admin.dashboard');
-  Route::resource('admin/categories', AdminCategoryController::class);
-  // Route::resource('admin/products', AdminProductController::class);
-  Route::resource('admin/orders', AdminOrderController::class);
-  Route::resource('admin/customers', AdminCustomerController::class);
-  Route::get('admin/orders/{order}/invoice', [AdminOrderController::class, 'generateInvoice'])->name('order.invoice');
-  Route::get('admin/reports/orders', [ReportController::class, 'orderReport'])->name('report.orders');
-  Route::get('admin/reports/customers', [ReportController::class, 'customerReport'])->name('report.customers');
+    return view('admin.dashboard', compact('totalOrders', 'totalSales', 'topProducts'));
+  }
+
+  return redirect('/');
 });
+
+Route::resource('admin/categories', AdminCategoryController::class);
+// Route::resource('admin/products', AdminProductController::class);
+Route::resource('admin/orders', AdminOrderController::class);
+Route::resource('admin/customers', AdminCustomerController::class);
+Route::get('admin/orders/{order}/invoice', [AdminOrderController::class, 'generateInvoice'])->name('order.invoice');
+Route::get('admin/reports/orders', [ReportController::class, 'orderReport'])->name('report.orders');
+Route::get('admin/reports/customers', [ReportController::class, 'customerReport'])->name('report.customers');
