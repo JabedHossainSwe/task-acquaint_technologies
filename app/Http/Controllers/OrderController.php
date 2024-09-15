@@ -42,6 +42,6 @@ class OrderController extends Controller
         // Clear the cart
         session()->forget('cart');
 
-        return redirect()->route('/')->with('success', 'Your order has been placed successfully.');
+        return redirect()->route('index')->with('success', 'Your order has been placed successfully.');
     }
 }

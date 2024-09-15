@@ -69,10 +69,39 @@ Route::get('/admin/dashboard', function () {
 })->name('admin.dashboard');
 
 
-Route::resource('admin/categories', AdminCategoryController::class);
-// Route::resource('admin/products', AdminProductController::class);
-Route::resource('admin/orders', AdminOrderController::class);
-Route::resource('admin/customers', AdminCustomerController::class);
+// Category Routes
+Route::get('/admin/categories', [AdminCategoryController::class, 'index'])->name('admin.categories.index');
+Route::get('/admin/categories/create', [AdminCategoryController::class, 'create'])->name('admin.categories.create');
+Route::post('/admin/categories', [AdminCategoryController::class, 'store'])->name('admin.categories.store');
+Route::get('/admin/categories/{category}/edit', [AdminCategoryController::class, 'edit'])->name('admin.categories.edit');
+Route::put('/admin/categories/{category}', [AdminCategoryController::class, 'update'])->name('admin.categories.update');
+Route::delete('/admin/categories/{category}', [AdminCategoryController::class, 'destroy'])->name('admin.categories.destroy');
+
+// Product Routes
+Route::get('/admin/products', [AdminProductController::class, 'index'])->name('admin.products.index');
+Route::get('/admin/products/create', [AdminProductController::class, 'create'])->name('admin.products.create');
+Route::post('/admin/products', [AdminProductController::class, 'store'])->name('admin.products.store');
+Route::get('/admin/products/{product}/edit', [AdminProductController::class, 'edit'])->name('admin.products.edit');
+Route::put('/admin/products/{product}', [AdminProductController::class, 'update'])->name('admin.products.update');
+Route::delete('/admin/products/{product}', [AdminProductController::class, 'destroy'])->name('admin.products.destroy');
+
+// Order Routes
+Route::get('/admin/orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');
+Route::get('/admin/orders/create', [AdminOrderController::class, 'create'])->name('admin.orders.create');
+Route::post('/admin/orders', [AdminOrderController::class, 'store'])->name('admin.orders.store');
+Route::get('/admin/orders/{order}/edit', [AdminOrderController::class, 'edit'])->name('admin.orders.edit');
+Route::put('/admin/orders/{order}', [AdminOrderController::class, 'update'])->name('admin.orders.update');
+Route::delete('/admin/orders/{order}', [AdminOrderController::class, 'destroy'])->name('admin.orders.destroy');
+Route::get('/admin/orders/{order}/invoice', [AdminOrderController::class, 'generateInvoice'])->name('order.invoice');
+
+// Customer Routes
+Route::get('/admin/customers', [AdminCustomerController::class, 'index'])->name('admin.customers.index');
+Route::get('/admin/customers/create', [AdminCustomerController::class, 'create'])->name('admin.customers.create');
+Route::post('/admin/customers', [AdminCustomerController::class, 'store'])->name('admin.customers.store');
+Route::get('/admin/customers/{customer}/edit', [AdminCustomerController::class, 'edit'])->name('admin.customers.edit');
+Route::put('/admin/customers/{customer}', [AdminCustomerController::class, 'update'])->name('admin.customers.update');
+Route::delete('/admin/customers/{customer}', [AdminCustomerController::class, 'destroy'])->name('admin.customers.destroy');
+
 Route::get('admin/orders/{order}/invoice', [AdminOrderController::class, 'generateInvoice'])->name('order.invoice');
 Route::get('admin/reports/orders', [ReportController::class, 'orderReport'])->name('report.orders');
 Route::get('admin/reports/customers', [ReportController::class, 'customerReport'])->name('report.customers');
