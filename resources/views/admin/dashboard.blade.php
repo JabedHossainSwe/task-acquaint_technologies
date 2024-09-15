@@ -95,6 +95,26 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Order Report -->
+            <div class="col-md-3">
+                <div class="card text-white bg-primary mb-3">
+                    <div class="card-header">Order Report</div>
+                    <div class="card-body">
+                        <a href="{{ route('report.orders') }}" class="btn btn-light w-100">Generate Order Report</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customer Report -->
+            <div class="col-md-3">
+                <div class="card text-white bg-secondary mb-3">
+                    <div class="card-header">Customer Report</div>
+                    <div class="card-body">
+                        <a href="{{ route('report.customers') }}" class="btn btn-light w-100">Generate Customer Report</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
