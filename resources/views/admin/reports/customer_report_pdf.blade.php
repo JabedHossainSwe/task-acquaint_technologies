@@ -21,7 +21,7 @@
 </head>
 
 <body>
-    <h1>Customer Report</h1>
+    <h1 style="text-align: center">Customer Report</h1>
 
     <table>
         <thead>

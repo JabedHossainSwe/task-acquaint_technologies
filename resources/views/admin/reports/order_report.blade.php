@@ -2,7 +2,9 @@
 @section('content')
     <div class="container mt-5">
         <h2 class="text-center mb-4">Order Report</h2>
-
+        <div class="text-center mt-4 mb-4">
+            <a href="{{ route('report.orders.download') }}" class="btn btn-success">Download PDF</a>
+        </div>
         <!-- Display Order Data -->
         <div class="table-responsive">
             <table class="table table-bordered">
@@ -15,8 +17,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($orders as $order)
-                        @foreach($order->products as $product)
+                    @foreach ($orders as $order)
+                        @foreach ($order->products as $product)
                             <tr>
                                 <td>{{ $order->id }}</td>
                                 <td>{{ $product->name }}</td>
@@ -27,6 +29,7 @@
                     @endforeach
                 </tbody>
             </table>
+
         </div>
     </div>
 @endsection

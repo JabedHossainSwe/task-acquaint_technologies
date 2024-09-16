@@ -7,32 +7,26 @@ use App\Models\Product;
 use App\Models\User;
 use PDF;
 use DB;
+
 class ReportController extends Controller
 {
-    // Order report view
     public function orderReport()
     {
-        // Fetch all orders with their related products
         $orders = Order::with('products')->get();
-
-        // Return the view for displaying the order report
         return view('admin.reports.order_report', compact('orders'));
     }
 
-    // Download Order report as PDF
     public function downloadOrderReport()
     {
-        // Fetch all orders with their related products
+        // Fetch orders with products
         $orders = Order::with('products')->get();
 
-        // Generate the PDF view for order report
-        $pdf = PDF::loadView('admin.reports.order_report_pdf', compact('orders'));
+        // Load the view with the orders data
+        $pdf = Pdf::loadView('admin.reports.order_report_pdf', compact('orders'));
 
-        // Download the generated PDF file
+        // Download the PDF
         return $pdf->download('order_report.pdf');
     }
-
-    // Customer report view
     public function customerReport()
     {
         // Fetch all users with their related orders and products

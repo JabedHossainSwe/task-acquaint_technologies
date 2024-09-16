@@ -2,7 +2,9 @@
 
 @section('content')
     <div class="container">
-        <h2>Customer Report</h2>
+        <div class="text-center">
+            <h2>Customer Report</h2>
+        </div>
 
         <form method="GET" action="{{ route('report.customers') }}">
             <div class="form-group">
@@ -18,7 +20,9 @@
             </div>
 
             <div class="form-group">
-                <label for="product_id">Product</label>
+                <div class="mt-3">
+                    <label for="product_id">Product</label>
+                </div>
                 <select name="product_id" id="product_id" class="form-control">
                     <option value="">All Products</option>
                     @foreach ($products as $product)
@@ -28,14 +32,19 @@
                     @endforeach
                 </select>
             </div>
-
-            <button type="submit" class="btn btn-primary">Filter</button>
+            <div class="mt-3">
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </div>
         </form>
 
 
         @if ($customers->isNotEmpty())
-            <h3 class="mt-4">Report Results</h3>
-            <a href="{{ route('report.customers.download') }}" class="btn btn-secondary">Download PDF</a>
+            <div class="text-center">
+                <h3 class="mt-4">Report Results</h3>
+            </div>
+            <div class="text-center mb-3">
+                <a href="{{ route('report.customers.download') }}" class="btn btn-primary">Download PDF</a>
+            </div>
 
             <table class="table">
                 <thead>
@@ -52,7 +61,7 @@
                             <td>{{ $customer->name }}</td>
                             <td>{{ $customer->phone }}</td>
                             <td>{{ $customer->payment_method }}</td>
-                            <td>{{ $customer->orders_count }}</td> <!-- Corrected orders_count usage -->
+                            <td>{{ $customer->orders_count }}</td>
                         </tr>
                     @endforeach
                 </tbody>
