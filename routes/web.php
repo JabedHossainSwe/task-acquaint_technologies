@@ -103,14 +103,13 @@ Route::get('/admin/customers/{customer}/edit', [AdminCustomerController::class, 
 Route::put('/admin/customers/{customer}', [AdminCustomerController::class, 'update'])->name('admin.customers.update');
 Route::delete('/admin/customers/{customer}', [AdminCustomerController::class, 'destroy'])->name('admin.customers.destroy');
 
-// Route for generating an invoice
 Route::get('admin/orders/{order}/invoice', [AdminOrderController::class, 'generateInvoice'])->name('orders.invoice');
 
-// Route for generating order reports
+
 Route::get('admin/reports/orders', [ReportController::class, 'orderReport'])->name('report.orders');
 
-// Route for generating customer reports
+
 Route::get('admin/reports/customers', [ReportController::class, 'customerReport'])->name('report.customers');
-// web.php
+
 Route::get('/admin/reports/orders/download', [ReportController::class, 'downloadOrderReport'])->name('report.orders.download');
 Route::get('/admin/reports/customers/download', [ReportController::class, 'downloadCustomerReport'])->name('report.customers.download');

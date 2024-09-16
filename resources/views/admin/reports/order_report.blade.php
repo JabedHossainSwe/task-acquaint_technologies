@@ -5,7 +5,7 @@
         <div class="text-center mt-4 mb-4">
             <a href="{{ route('report.orders.download') }}" class="btn btn-success">Download PDF</a>
         </div>
-        <!-- Display Order Data -->
+
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
