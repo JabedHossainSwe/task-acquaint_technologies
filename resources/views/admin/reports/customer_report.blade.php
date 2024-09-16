@@ -35,6 +35,8 @@
 
         @if ($customers->isNotEmpty())
             <h3 class="mt-4">Report Results</h3>
+            <a href="{{ route('report.customers.download') }}" class="btn btn-secondary">Download PDF</a>
+
             <table class="table">
                 <thead>
                     <tr>

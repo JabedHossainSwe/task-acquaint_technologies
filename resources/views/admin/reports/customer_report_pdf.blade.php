@@ -2,21 +2,18 @@
 <html>
 
 <head>
-    <title>Customer Report PDF</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Customer Report</title>
     <style>
         table {
             width: 100%;
             border-collapse: collapse;
         }
 
-        table,
         th,
         td {
             border: 1px solid black;
-        }
-
-        th,
-        td {
             padding: 8px;
             text-align: left;
         }
@@ -24,32 +21,28 @@
 </head>
 
 <body>
-    <h2>Customer Report</h2>
+    <h1>Customer Report</h1>
 
-    @if ($customers->isNotEmpty())
-        <table>
-            <thead>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Payment Method</th>
+                <th>Orders Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($customers as $customer)
                 <tr>
-                    <th>Customer ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Orders Count</th>
+                    <td>{{ $customer->name }}</td>
+                    <td>{{ $customer->phone }}</td>
+                    <td>{{ $customer->payment_method }}</td>
+                    <td>{{ $customer->orders_count }}</td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach ($customers as $customer)
-                    <tr>
-                        <td>{{ $customer->id }}</td>
-                        <td>{{ $customer->name }}</td>
-                        <td>{{ $customer->email }}</td>
-                        <td>{{ $customer->orders->count() }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    @else
-        <p>No customers found for the selected criteria.</p>
-    @endif
+            @endforeach
+        </tbody>
+    </table>
 </body>
 
 </html>

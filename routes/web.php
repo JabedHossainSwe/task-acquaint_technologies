@@ -114,4 +114,3 @@ Route::get('admin/reports/customers', [ReportController::class, 'customerReport'
 // web.php
 Route::get('/admin/reports/orders/download', [ReportController::class, 'downloadOrderReport'])->name('report.orders.download');
 Route::get('/admin/reports/customers/download', [ReportController::class, 'downloadCustomerReport'])->name('report.customers.download');
-Route::get('/admin/reports/customers/pdf', [ReportController::class, 'customerReportPDF'])->name('report.customers.pdf');
