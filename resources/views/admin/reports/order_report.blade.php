@@ -9,19 +9,21 @@
                 <thead>
                     <tr>
                         <th>Order ID</th>
-                        <th>User ID</th>
-                        <th>Total Amount</th>
-                        <th>Created At</th>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($orders as $order)
-                        <tr>
-                            <td>{{ $order->id }}</td>
-                            <td>{{ $order->user_id }}</td>
-                            <td>${{ number_format($order->total_amount, 2) }}</td>
-                            <td>{{ $order->created_at }}</td>
-                        </tr>
+                    @foreach($orders as $order)
+                        @foreach($order->products as $product)
+                            <tr>
+                                <td>{{ $order->id }}</td>
+                                <td>{{ $product->name }}</td>
+                                <td>{{ $product->pivot->quantity }}</td>
+                                <td>${{ number_format($product->pivot->price, 2) }}</td>
+                            </tr>
+                        @endforeach
                     @endforeach
                 </tbody>
             </table>

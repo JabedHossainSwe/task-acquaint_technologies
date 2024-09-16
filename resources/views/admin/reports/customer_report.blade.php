@@ -16,6 +16,7 @@
                     @endforeach
                 </select>
             </div>
+
             <div class="form-group">
                 <label for="product_id">Product</label>
                 <select name="product_id" id="product_id" class="form-control">
@@ -27,27 +28,29 @@
                     @endforeach
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Generate Report</button>
+
+            <button type="submit" class="btn btn-primary">Filter</button>
         </form>
+
 
         @if ($customers->isNotEmpty())
             <h3 class="mt-4">Report Results</h3>
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Customer ID</th>
                         <th>Name</th>
-                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Payment Method</th>
                         <th>Orders Count</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($customers as $customer)
                         <tr>
-                            <td>{{ $customer->id }}</td>
                             <td>{{ $customer->name }}</td>
-                            <td>{{ $customer->email }}</td>
-                            <td>{{ $customer->orders->count() }}</td>
+                            <td>{{ $customer->phone }}</td>
+                            <td>{{ $customer->payment_method }}</td>
+                            <td>{{ $customer->orders_count }}</td> <!-- Corrected orders_count usage -->
                         </tr>
                     @endforeach
                 </tbody>
@@ -55,5 +58,6 @@
         @else
             <p>No customers found for the selected criteria.</p>
         @endif
+
     </div>
 @endsection

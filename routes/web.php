@@ -111,3 +111,7 @@ Route::get('admin/reports/orders', [ReportController::class, 'orderReport'])->na
 
 // Route for generating customer reports
 Route::get('admin/reports/customers', [ReportController::class, 'customerReport'])->name('report.customers');
+// web.php
+Route::get('/admin/reports/orders/download', [ReportController::class, 'downloadOrderReport'])->name('report.orders.download');
+Route::get('/admin/reports/customers/download', [ReportController::class, 'downloadCustomerReport'])->name('report.customers.download');
+Route::get('/admin/reports/customers/pdf', [ReportController::class, 'customerReportPDF'])->name('report.customers.pdf');
